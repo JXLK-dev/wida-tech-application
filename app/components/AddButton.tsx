@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { InvoiceProduct } from "./InvoiceProduct";
 import { FieldButton } from "./FieldButton";
 import { Card } from "./Card";
-import { ComponentFunctions } from "./Function";
+import { ComponentFunctions } from "./function/Function";
 import { AlertDialog } from "./AlertDialog";
 export const AddButton: React.FC = () => {
   const [showDialog, setShowDialog] = useState(false);

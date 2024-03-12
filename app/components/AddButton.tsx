@@ -101,6 +101,15 @@ export const AddButton: React.FC = () => {
     setAddedCart(source);
   };
 
+  const deleteFromCart = (product) => {
+    const source = { ...addedCart };
+    if (source[product.name]["quantity"] > 1) {
+      source[product.name]["quantity"] = source[product.name]["quantity"] - 1;
+    } else {
+      delete source[product.name];
+    }
+    setAddedCart(source);
+  };
   const filterProduct = (e) => {
     const searchResult = products.filter((product) =>
       product.name.toLowerCase().includes(e.toLowerCase())
@@ -177,7 +186,10 @@ export const AddButton: React.FC = () => {
   };
   const labels = ["Date", "Customer Name", "Salesperson Name", "Notes"];
   const ids = ["date", "customerName", "salespersonName", "notes"];
-  const productLabels = ["Image", "Name", "Price", "Quantity"];
+  const productLabels = [
+    ["Image", "Name", "Price", "Stocks"],
+    ["Image", "Name", "Price", "Quantity", "Total"],
+  ];
   const productHeaderLabel = ["Result", "Added Product"];
   return (
     <div>
@@ -222,36 +234,47 @@ export const AddButton: React.FC = () => {
               Cancel
             </button>
           </div>
-          <div>
-            <h1>Add Product</h1>
-          </div>
-          <div>
-            <input
-              id="searchProduct"
-              type="text"
-              placeholder="Search"
-              className={`p-2 border border-gray-300 rounded ${
-                errors.salespersonName ? "border-red-500" : ""
-              }`}
-              onChange={(e) => {
-                filterProduct(e.target.value);
-              }}
-            />
-            {errors.addedCart && (
-              <p className="text-red-500 text-xs">{errors.addedCart}</p>
-            )}
+
+          <div className="flex space-x-5">
+            <div>
+              <h1>Add Product:</h1>
+              <input
+                id="searchProduct"
+                type="text"
+                placeholder="Search"
+                className={`p-2 border border-gray-300 rounded ${
+                  errors.salespersonName ? "border-red-500" : ""
+                }`}
+                onChange={(e) => {
+                  filterProduct(e.target.value);
+                }}
+              />
+              {errors.addedCart && (
+                <p className="text-red-500 text-xs">{errors.addedCart}</p>
+              )}
+            </div>
+            <div>
+              <h1>Grand Total:</h1>
+              <h1>
+                {Object.values(addedCart).reduce((total, product) => {
+                  return (
+                    total + Number(product.price) * Number(product.quantity)
+                  );
+                }, 0)}
+              </h1>
+            </div>
           </div>
           <div className="grid grid-cols-2 space-x-5">
             {productHeaderLabel.map((label, index) => (
               <div key={index} className="text-center">
                 <Card
                   label={label}
-                  headerLabels={productLabels}
-                  onClick={[addToCart, addToCart][index]}
+                  headerLabels={productLabels[index]}
+                  onClick={[addToCart, deleteFromCart][index]}
                   products={
                     [searchProduct, [...Object.values(addedCart)]][index]
                   }
-                  isTotal={false}
+                  isTotal={[false, true][index]}
                 />
               </div>
             ))}

@@ -26,7 +26,7 @@ export const Card: React.FC<CardProps> = (props) => {
             <span key={index}>{label}</span>
           ))}
         </li>
-        <li className="overflow-y-auto max-h-[600px]">
+        <li className="overflow-y-auto max-h-[500px]">
           <ul>
             {props.products.map((product, index) => (
               <InvoiceProduct

@@ -1,4 +1,5 @@
-class ComponentFunctions {
+import React, { Component } from "react";
+export class ComponentFunctions extends Component {
   static greet(name: string): string {
     return `Hello, ${name}!`;
   }
@@ -10,7 +11,11 @@ class ComponentFunctions {
   static formatDate(date: Date): string {
     return date.toISOString();
   }
-  static currencyFormat(num) {
-    return "Rp" + num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+  static formatCurrency(amount: number): string {
+    const formatter = new Intl.NumberFormat("id-ID", {
+      style: "currency",
+      currency: "IDR",
+    });
+    return formatter.format(amount).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
 }

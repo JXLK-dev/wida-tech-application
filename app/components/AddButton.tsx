@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { InvoiceProduct } from "./InvoiceProduct";
 import { FieldButton } from "./FieldButton";
 import { Card } from "./Card";
+import { ComponentFunctions } from "./Function";
 export const AddButton: React.FC = () => {
   const [showDialog, setShowDialog] = useState(false);
   const [date, setDate] = useState("");
@@ -156,10 +157,6 @@ export const AddButton: React.FC = () => {
       newErrors.salespersonName = "Salesperson Name is required";
       isValid = false;
     }
-    if (notes.trim() === "") {
-      newErrors.notes = "Notes is required";
-      isValid = false;
-    }
     if (Object.keys(addedCart).length === 0) {
       newErrors.addedCart = "Product must not be empty";
       isValid = false;
@@ -256,11 +253,13 @@ export const AddButton: React.FC = () => {
             <div>
               <h1>Grand Total:</h1>
               <h1>
-                {Object.values(addedCart).reduce((total, product) => {
-                  return (
-                    total + Number(product.price) * Number(product.quantity)
-                  );
-                }, 0)}
+                {ComponentFunctions.formatCurrency(
+                  Object.values(addedCart).reduce((total, product) => {
+                    return (
+                      total + Number(product.price) * Number(product.quantity)
+                    );
+                  }, 0)
+                )}
               </h1>
             </div>
           </div>

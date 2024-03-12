@@ -2,6 +2,8 @@ import React from "react";
 
 import Image from "next/image";
 
+import { ComponentFunctions } from "./Function";
+
 interface InvoiceProductProps {
   index: number;
   name: string;
@@ -28,9 +30,15 @@ export const InvoiceProduct: React.FC<InvoiceProductProps> = (props) => {
         height={50}
       />
       <span>{props.name}</span>
-      <span>{props.price}</span>
+      <span className="w-fit">
+        {ComponentFunctions.formatCurrency(props.price)}
+      </span>
       <span>{props.quantity}</span>
-      {props.isTotal && <span>{props.price * props.quantity}</span>}
+      {props.isTotal && (
+        <span className="w-fit">
+          {ComponentFunctions.formatCurrency(props.price * props.quantity)}
+        </span>
+      )}
     </li>
   );
 };

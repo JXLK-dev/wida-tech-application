@@ -3,6 +3,7 @@ import { InvoiceProduct } from "./InvoiceProduct";
 import { FieldButton } from "./FieldButton";
 import { Card } from "./Card";
 import { ComponentFunctions } from "./Function";
+import { AlertDialog } from "./AlertDialog";
 export const AddButton: React.FC = () => {
   const [showDialog, setShowDialog] = useState(false);
   const [date, setDate] = useState("");
@@ -18,6 +19,7 @@ export const AddButton: React.FC = () => {
     notes: "",
     addedCart: "",
   });
+  const [confirmDialog, setConfirmDialog] = useState(false);
   const products = [
     {
       name: "Jordan 1",
@@ -179,7 +181,17 @@ export const AddButton: React.FC = () => {
     setNotes("");
 
     // Close the dialog
+    setConfirmDialog(true);
+  };
+  const handleAlertConfirm = () => {
+    // Implement your logic for confirm action here
+    setConfirmDialog(false);
     setShowDialog(false);
+  };
+
+  const handleAlertCancel = () => {
+    // Implement your logic for cancel action here
+    setConfirmDialog(false);
   };
   const labels = ["Date", "Customer Name", "Salesperson Name", "Notes"];
   const ids = ["date", "customerName", "salespersonName", "notes"];
@@ -190,9 +202,6 @@ export const AddButton: React.FC = () => {
   const productHeaderLabel = ["Result", "Added Product"];
   return (
     <div>
-      {showDialog && (
-        <div className="fixed bg-black w-screen h-screen top-0 left-0 opacity-65"></div>
-      )}
       <button
         disabled={showDialog}
         onClick={handleButtonClick}
@@ -200,7 +209,9 @@ export const AddButton: React.FC = () => {
       >
         Add Invoice <span>+</span>
       </button>
-
+      {showDialog && (
+        <div className="fixed bg-black w-screen h-screen top-0 left-0 opacity-65"></div>
+      )}
       {showDialog && (
         <div className="fixed z-20 top-1/2 left-1/2 transform -translate-x-1/2 text-black -translate-y-1/2 bg-white p-4 rounded shadow-lg w-10/12">
           <div className="flex space-x-5">
@@ -278,6 +289,29 @@ export const AddButton: React.FC = () => {
               </div>
             ))}
           </div>
+        </div>
+      )}
+
+      {confirmDialog && (
+        <div className="fixed bg-black w-screen h-screen top-0 left-0 opacity-80 z-30"></div>
+      )}
+      {confirmDialog && (
+        <div className="fixed z-30 top-1/2 left-1/2 transform -translate-x-1/2 text-black -translate-y-1/2 bg-white p-4 rounded shadow-lg w-1/6">
+          <AlertDialog
+            subtitle={
+              "The Grand Total is:" +
+              ComponentFunctions.formatCurrency(
+                Object.values(addedCart).reduce((total, product) => {
+                  return (
+                    total + Number(product.price) * Number(product.quantity)
+                  );
+                }, 0)
+              )
+            }
+            onConfirm={handleAlertConfirm}
+            onCancel={handleAlertCancel}
+            title="Confirm Submission"
+          />
         </div>
       )}
     </div>

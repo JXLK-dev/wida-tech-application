@@ -15,7 +15,9 @@ export const GetData: React.FC = () => {
   useEffect(() => {
     // Fetch data from the database or API
     const fetchData = async () => {
-      const json = await DataComponent.getData();
+      const json = await DataComponent.getData(
+        "http://localhost:3000/api/get-invoice"
+      );
       setData(json.result);
     };
     fetchData();

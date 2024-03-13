@@ -224,7 +224,10 @@ export const AddButton: React.FC = (props) => {
 
     setLoading(true);
     props.refresh(false);
-    const success = await DataComponent.postData(data);
+    const success = await DataComponent.postData(
+      data,
+      "http://localhost:3000/api/insert-invoice"
+    );
     props.refresh(true);
     setLoading(false);
     setNotification(true);

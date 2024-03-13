@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import axios from "axios";
 
 export class DataComponent extends Component {
-  static getData = async () => {
+  static getData = async (url) => {
     const response = await axios
-      .get("http://localhost:3000/api/get-invoice?limit=10")
+      .get(url)
       .then((response) => {
         console.log(response.data);
         return response.data;
@@ -19,7 +19,7 @@ export class DataComponent extends Component {
     return response;
   };
 
-  static postData(data) {
+  static postData(data, url) {
     // console.log(data);
     const posting = {
       method: "POST",
@@ -35,7 +35,7 @@ export class DataComponent extends Component {
       }),
     };
     axios
-      .post("http://localhost:3000/api/insert-invoice", posting)
+      .post(url, posting)
       .then((response) => {
         // Handle the response data here
         console.log(response.data);
@@ -46,6 +46,6 @@ export class DataComponent extends Component {
         console.error(error.response.data);
         return false;
       });
-    return posting;
+    return true;
   }
 }

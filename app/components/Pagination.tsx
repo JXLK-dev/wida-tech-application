@@ -4,14 +4,15 @@ import { DataComponent } from "./function/DataJson";
 interface PaginationProps {
   currentPage: number;
   totalPages: number;
-  onPageChange: (page: number) => void;
 }
 
 export const Pagination: React.FC<PaginationProps> = ({
   currentPage,
   totalPages,
-  onPageChange,
+  refreshPage,
   handlePageChange,
+  setIndexOfFirstCard,
+  setIndexOfLastCard,
 }) => {
   const renderPageNumbers = () => {
     const pageNumbers = [];
@@ -22,7 +23,13 @@ export const Pagination: React.FC<PaginationProps> = ({
       pageNumbers.push(
         <button
           key={i}
-          onClick={() => handlePageChange(i)}
+          onClick={() => {
+            setIndexOfFirstCard((i - 1) * 10);
+            setIndexOfLastCard(i * 10);
+            refreshPage(false);
+            handlePageChange(i);
+            refreshPage(true);
+          }}
           className={`px-4 py-2 rounded ${
             currentPage === i
               ? "bg-blue-500 text-white"
@@ -39,7 +46,13 @@ export const Pagination: React.FC<PaginationProps> = ({
   return (
     <div className="bottom-0 mr-20 fixed flex items-center justify-center space-x-4 z-20 bg-cyan-800 rounded-md p-2 mb-3">
       <button
-        onClick={() => handlePageChange(currentPage - 1)}
+        onClick={() => {
+          setIndexOfFirstCard((i - 1) * 10);
+          setIndexOfLastCard(i * 10);
+          refreshPage(false);
+          handlePageChange(currentPage - 1);
+          refreshPage(true);
+        }}
         disabled={currentPage === 1}
         className="px-4 py-2 bg-blue-500 text-white rounded disabled:bg-gray-300 disabled:text-gray-500"
       >
@@ -47,7 +60,13 @@ export const Pagination: React.FC<PaginationProps> = ({
       </button>
       {renderPageNumbers()} {/* Add rendered page numbers */}
       <button
-        onClick={() => handlePageChange(currentPage + 1)}
+        onClick={() => {
+          setIndexOfFirstCard((i - 1) * 10);
+          setIndexOfLastCard(i * 10);
+          refreshPage(false);
+          handlePageChange(currentPage + 1);
+          refreshPage(true);
+        }}
         disabled={currentPage === totalPages}
         className="px-4 py-2 bg-blue-500 text-white rounded disabled:bg-gray-300 disabled:text-gray-500"
       >

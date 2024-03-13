@@ -11,6 +11,7 @@ export const Pagination: React.FC<PaginationProps> = ({
   currentPage,
   totalPages,
   onPageChange,
+  handlePageChange,
 }) => {
   const renderPageNumbers = () => {
     const pageNumbers = [];

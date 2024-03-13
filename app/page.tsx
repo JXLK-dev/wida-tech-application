@@ -21,8 +21,15 @@ export default function Home() {
     <main className="min-h-screen items-center justify-between p-24 bg-gradient-to-r from-blue-900 to-cyan-500">
       <div className="flex flex-col md:flex-row justify-end">
         <NavBar page="invoice" />
-        <Pagination currentPage={currentPage} totalPages={10} />
-        <div className="w-3/4">{refresh && <GetData />}</div>
+        <Pagination
+          currentPage={currentPage}
+          totalPages={10}
+          onPageChange={() => {}}
+          handlePageChange={setCurrentPage}
+        />
+        <div className="w-3/4">
+          {refresh && <GetData offset={indexOfFirstCard} />}
+        </div>
       </div>
       <AddButton refresh={setRefresh} />
     </main>

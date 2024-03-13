@@ -10,13 +10,13 @@ interface Data {
   // Add more properties as needed
 }
 
-export const GetData: React.FC = () => {
+export const GetData: React.FC = (props) => {
   const [data, setData] = useState([]);
   useEffect(() => {
     // Fetch data from the database or API
     const fetchData = async () => {
       const json = await DataComponent.getData(
-        "http://localhost:3000/api/get-invoice"
+        `http://localhost:3000/api/get-invoice?offset=${props.offset}`
       );
       setData(json.result);
     };

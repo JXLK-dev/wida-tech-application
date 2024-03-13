@@ -98,10 +98,10 @@ export const LineChart: React.FC = (props) => {
                 },
                 mode: "xy",
               },
-            },
-            pan: {
-              enabled: true,
-              mode: "xy",
+              pan: {
+                enabled: true,
+                mode: "xy",
+              },
             },
           },
         }}

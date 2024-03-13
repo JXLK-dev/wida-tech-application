@@ -64,8 +64,9 @@ export const LineChart: React.FC = (props) => {
   }
   return (
     <div className="chart-container">
-      <h2 style={{ textAlign: "center" }}>Line Chart</h2>
+      <h2 className="text-white text-center text-4xl mb-4">Line Chart</h2>
       <Line
+        className="text-white bg-white rounded-lg mb-4 p-4"
         data={{
           labels: labels,
           datasets: [
@@ -97,6 +98,10 @@ export const LineChart: React.FC = (props) => {
                 },
                 mode: "xy",
               },
+            },
+            pan: {
+              enabled: true,
+              mode: "xy",
             },
           },
         }}

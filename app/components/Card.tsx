@@ -8,6 +8,7 @@ interface CardProps {
     name: string;
     price: number;
     quantity: number;
+    imgSrc: string;
   }[];
   isTotal: boolean;
 }
@@ -35,6 +36,7 @@ export const Card: React.FC<CardProps> = (props) => {
                 name={product.name}
                 price={product.price}
                 quantity={product.quantity}
+                imageSrc={product.imgSrc}
                 isTotal={props.isTotal}
                 onClick={
                   props.onClick

@@ -7,7 +7,7 @@ export async function POST(req: Request) {
   const dataJson = JSON.parse(reqJson["body"]);
   try {
     const querySqlProduct =
-      "INSERT INTO products (invoice_number, name, price, quantity) VALUES (?,?,?,?)";
+      "INSERT INTO products (invoice_number, name, price, quantity,imgSrc) VALUES (?,?,?,?,?)";
 
     dataJson.products.map(async (product) => {
       const productValues = [
@@ -15,6 +15,7 @@ export async function POST(req: Request) {
         product.name,
         product.price,
         product.quantity,
+        product.imgSrc,
       ];
       await query(querySqlProduct, productValues);
     });

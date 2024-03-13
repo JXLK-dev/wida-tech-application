@@ -9,6 +9,7 @@ interface InvoiceProductProps {
   name: string;
   price: number;
   quantity: number;
+  imageSrc: string;
   isTotal: boolean;
 }
 
@@ -24,7 +25,7 @@ export const InvoiceProduct: React.FC<InvoiceProductProps> = (props) => {
     >
       <Image
         className="lg:min-w-40 md:min-w-28 min-w-20"
-        src={`https://img-global.cpcdn.com/recipes/d5fdeda7a69719d9/1200x630cq70/photo.jpg`}
+        src={props.imageSrc}
         alt={props.name}
         width={50}
         height={50}

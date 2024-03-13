@@ -4,7 +4,7 @@ import axios from "axios";
 export class DataComponent extends Component {
   static getData = async () => {
     const response = await axios
-      .get("http://localhost:3000/api/get-invoice")
+      .get("http://localhost:3000/api/get-invoice?limit=10")
       .then((response) => {
         console.log(response.data);
         return response.data;
@@ -39,11 +39,13 @@ export class DataComponent extends Component {
       .then((response) => {
         // Handle the response data here
         console.log(response.data);
+        return true;
       })
       .catch((error) => {
         // Handle any errors here
         console.error(error.response.data);
+        return false;
       });
-    return;
+    return posting;
   }
 }

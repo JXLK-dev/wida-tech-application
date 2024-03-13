@@ -5,8 +5,9 @@ import { Card } from "./Card";
 import { ComponentFunctions } from "./function/Function";
 import { AlertDialog } from "./AlertDialog";
 import { DataComponent } from "./function/DataJson";
+import { PopUpDialog } from "./PopUpDialog";
 
-export const AddButton: React.FC = () => {
+export const AddButton: React.FC = (props) => {
   const [showDialog, setShowDialog] = useState(false);
   const [date, setDate] = useState("");
   const [customerName, setCustomerName] = useState("");
@@ -21,69 +22,97 @@ export const AddButton: React.FC = () => {
     notes: "",
     addedCart: "",
   });
+  const [notification, setNotification] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [confirmDialog, setConfirmDialog] = useState(false);
   const products = [
     {
+      imgSrc:
+        "https://img-global.cpcdn.com/recipes/d5fdeda7a69719d9/1200x630cq70/photo.jpg",
       name: "Jordan 1",
       price: "1950000",
       quantity: "5",
     },
     {
+      imgSrc:
+        "https://img-global.cpcdn.com/recipes/d5fdeda7a69719d9/1200x630cq70/photo.jpg",
       name: "Jordan 2",
       price: "1950000",
       quantity: "5",
     },
     {
+      imgSrc:
+        "https://img-global.cpcdn.com/recipes/d5fdeda7a69719d9/1200x630cq70/photo.jpg",
       name: "Jordan 15",
       price: "2000000",
       quantity: "3",
     },
     {
+      imgSrc:
+        "https://img-global.cpcdn.com/recipes/d5fdeda7a69719d9/1200x630cq70/photo.jpg",
       name: "Jordan 16",
       price: "1800000",
       quantity: "7",
     },
     {
+      imgSrc:
+        "https://img-global.cpcdn.com/recipes/d5fdeda7a69719d9/1200x630cq70/photo.jpg",
       name: "Jordan 17",
       price: "2200000",
       quantity: "2",
     },
     {
+      imgSrc:
+        "https://img-global.cpcdn.com/recipes/d5fdeda7a69719d9/1200x630cq70/photo.jpg",
       name: "Jordan 18",
       price: "1900000",
       quantity: "4",
     },
     {
+      imgSrc:
+        "https://img-global.cpcdn.com/recipes/d5fdeda7a69719d9/1200x630cq70/photo.jpg",
       name: "Jordan 19",
       price: "2100000",
       quantity: "6",
     },
     {
+      imgSrc:
+        "https://img-global.cpcdn.com/recipes/d5fdeda7a69719d9/1200x630cq70/photo.jpg",
       name: "Jordan 20",
       price: "2300000",
       quantity: "1",
     },
     {
+      imgSrc:
+        "https://img-global.cpcdn.com/recipes/d5fdeda7a69719d9/1200x630cq70/photo.jpg",
       name: "Jordan 21",
       price: "2400000",
       quantity: "8",
     },
     {
+      imgSrc:
+        "https://img-global.cpcdn.com/recipes/d5fdeda7a69719d9/1200x630cq70/photo.jpg",
       name: "Jordan 22",
       price: "1700000",
       quantity: "9",
     },
     {
+      imgSrc:
+        "https://img-global.cpcdn.com/recipes/d5fdeda7a69719d9/1200x630cq70/photo.jpg",
       name: "Jordan 23",
       price: "2500000",
       quantity: "2",
     },
     {
+      imgSrc:
+        "https://img-global.cpcdn.com/recipes/d5fdeda7a69719d9/1200x630cq70/photo.jpg",
       name: "Jordan 24",
       price: "2600000",
       quantity: "5",
     },
     {
+      imgSrc:
+        "https://img-global.cpcdn.com/recipes/d5fdeda7a69719d9/1200x630cq70/photo.jpg",
       name: "Jordan 14",
       price: "1950000",
       quantity: "5",
@@ -98,6 +127,7 @@ export const AddButton: React.FC = () => {
       }
     } else {
       source[product.name] = {
+        imgSrc: product.imgSrc,
         name: product.name,
         price: product.price,
         quantity: 1,
@@ -182,7 +212,7 @@ export const AddButton: React.FC = () => {
     // Close the dialog
     setConfirmDialog(true);
   };
-  const handleAlertConfirm = () => {
+  const handleAlertConfirm = async () => {
     // Implement your logic for confirm action here
     const data = {
       date: date,
@@ -191,7 +221,13 @@ export const AddButton: React.FC = () => {
       notes: notes,
       products: Object.values(addedCart),
     };
-    DataComponent.postData(data);
+
+    setLoading(true);
+    props.refresh(false);
+    const success = await DataComponent.postData(data);
+    props.refresh(true);
+    setLoading(false);
+    setNotification(true);
     setConfirmDialog(false);
     setShowDialog(false);
     // Reset the form fields
@@ -222,6 +258,15 @@ export const AddButton: React.FC = () => {
       >
         Add Invoice <span>+</span>
       </button>
+      {loading && <PopUpDialog label="Loading..." />}
+      {notification && (
+        <PopUpDialog
+          label="Data has been saved"
+          onClick={() => {
+            setNotification(false);
+          }}
+        />
+      )}
       {showDialog && (
         <div className="fixed bg-black w-screen h-screen top-0 left-0 opacity-65"></div>
       )}

@@ -6,6 +6,8 @@ This project is built using Next.js and React to optimize performance and enhanc
 
 - Next.js: A React framework for server-side rendering and static site generation.
 - React: A JavaScript library for building user interfaces.
+- Tailwind CSS: A utility-first CSS framework for rapidly building custom designs.
+- Chart.js: A JavaScript library for data visualization.
 - [Add more technologies used in your project]
 
 ## Getting Started
@@ -19,22 +21,16 @@ To get started with the project, follow these steps:
 
 ## Features
 
-- [Adding]
-
-## Contributing
-
-Contributions are welcome! If you'd like to contribute to this project, please follow these guidelines:
-
-1. Fork the repository
-2. Create a new branch: `git checkout -b feature/your-feature-name`
-3. Make your changes and commit them: `git commit -m 'Add your commit message'`
-4. Push to the branch: `git push origin feature/your-feature-name`
-5. Open a pull request
-
-## License
-
-[Specify the license for your project]
+- Adding invoices
+- Tracking invoices
+- Sales performance visualization
 
 ## Contact
 
-If you have any questions or suggestions, feel free to reach out to us at [your-email@example.com].
+If you have any questions or suggestions, feel free to reach out to us at [jerrybudiman03@gmail.com].
+
+## API and Database
+
+The API for this website was built using the App Router library in React.js. App Router is a lightweight routing library that helps in creating routes for single-page applications.
+
+As for the database, SQL was used to store and manage the data for this website. SQL is a widely used relational database management system that provides a structured approach to storing and retrieving data.

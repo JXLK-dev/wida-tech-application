@@ -6,11 +6,14 @@ export async function GET(req: Request) {
   const offset = urlParams.get("offset");
   const querySql = `SELECT * FROM invoice LIMIT 10 OFFSET ${offset}`;
   const result = await query(querySql);
-  const cleaned = result.map(async (invoice) => {
-    const queryProduct = `SELECT * FROM products WHERE invoice_number = '${invoice.invoice_number}'`;
-    const product = await query(queryProduct);
-    console.log(product);
-    return { ...invoice, products: product };
+  const queryProduct =
+    "SELECT * FROM products WHERE invoice_number IN (SELECT invoice_number FROM invoice)";
+  const product = await query(queryProduct);
+  const cleaned = result.map((invoice) => {
+    const filteredProduct = product.filter(
+      (p) => p.invoice_number === invoice.invoice_number
+    );
+    return { ...invoice, products: filteredProduct };
   });
   return NextResponse.json({ result: cleaned });
 }

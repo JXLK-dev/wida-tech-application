@@ -2,10 +2,11 @@ import React, { Component } from "react";
 import axios from "axios";
 
 export class DataComponent extends Component {
-  static getData() {
-    axios
+  static getData = async () => {
+    const response = await axios
       .get("http://localhost:3000/api/get-invoice")
       .then((response) => {
+        console.log(response.data);
         return response.data;
         // Handle the response data here
         // this.setState({ data: response.data });
@@ -15,7 +16,8 @@ export class DataComponent extends Component {
         // Handle any errors here
         // this.setState({ error: error.message });
       });
-  }
+    return response;
+  };
 
   static postData(data) {
     // console.log(data);

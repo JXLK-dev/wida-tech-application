@@ -5,6 +5,7 @@ import { AddButton } from "../app/components/AddButton";
 import { NavBar } from "../app/components/NavBar";
 import { DataComponent } from "../app/components/function/DataJson";
 import { Pagination } from "../app/components/Pagination";
+import { GetData } from "../app/components/function/GetData";
 
 export default function Home() {
   const cards = [
@@ -40,33 +41,20 @@ export default function Home() {
     setData(data);
   };
 
-  const [currentPage, setCurrentPage] = useState(1); // Add currentPage state variable
-  const cardsPerPage = 5; // Set the number of cards to display per page
+  // const [currentPage, setCurrentPage] = useState(1); // Add currentPage state variable
+  // const cardsPerPage = 10; // Set the number of cards to display per page
 
   // Calculate the index of the first and last card to display
-  const indexOfLastCard = currentPage * cardsPerPage;
-  const indexOfFirstCard = indexOfLastCard - cardsPerPage;
-  const currentCards = cards.slice(indexOfFirstCard, indexOfLastCard);
-
+  // const indexOfLastCard = currentPage * cardsPerPage;
+  // const indexOfFirstCard = indexOfLastCard - cardsPerPage;
+  // const currentCards = data.slice(indexOfFirstCard, indexOfLastCard);
   return (
     <main className="min-h-screen items-center justify-between p-24 bg-gradient-to-r from-blue-900 to-cyan-500">
       <div className="flex flex-col md:flex-row justify-end">
         <NavBar page="invoice" />
-        <Pagination currentPage={currentPage} totalPages={10} />
+        {/* <Pagination currentPage={currentPage} totalPages={10} /> */}
         <div className="w-3/4">
-          {currentCards.map((card, index) => (
-            <InvoiceCard
-              key={index}
-              date={card.date}
-              invoiceId={card.invoiceId}
-              customerName={card.customerName}
-              notes={card.notes}
-              products={card.products}
-              sellerName={card.sellerName}
-              headerLabels={["Image", "Name", "Price", "Quantity", "Total"]}
-              isTotal={true}
-            />
-          ))}
+          <GetData />
         </div>
       </div>
       <AddButton />

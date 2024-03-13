@@ -18,4 +18,8 @@ export class ComponentFunctions extends Component {
     });
     return formatter.format(amount).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
+  static generateUniqueId(prefix: string): string {
+    const uniqueId = `${prefix}-${Date.now()}`;
+    return uniqueId;
+  }
 }

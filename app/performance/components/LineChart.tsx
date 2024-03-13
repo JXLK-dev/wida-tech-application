@@ -1,6 +1,10 @@
 import React from "react";
 import { Line } from "react-chartjs-2";
+import { Chart } from "chart.js";
+import zoomPlugin from "chartjs-plugin-zoom";
+
 export function LineChart() {
+  Chart.register(zoomPlugin);
   const labels = [
     "January",
     "February",
@@ -10,31 +14,6 @@ export function LineChart() {
     "June",
     "July",
   ];
-  const scaleOpts = {
-    grid: {
-      borderColor: Utils.randomColor(1),
-      color: "rgba( 0, 0, 0, 0.1)",
-    },
-    title: {
-      display: true,
-      text: (ctx) => ctx.scale.axis + " axis",
-    },
-  };
-  const scales = {
-    x: {
-      type: "category",
-    },
-    y: {
-      type: "linear",
-      ticks: {
-        callback: (val, index, ticks) =>
-          index === 0 || index === ticks.length - 1 ? null : val,
-      },
-    },
-  };
-  Object.keys(scales).forEach((scale) =>
-    Object.assign(scales[scale], scaleOpts)
-  );
   const data = {
     labels: labels,
     datasets: [
@@ -47,13 +26,13 @@ export function LineChart() {
       },
     ],
   };
+
   return (
     <div className="chart-container">
-      <h2 style={{ textAlign: "center" }}>Line Chart</h2>
+      <h2 style={{ textAlign: "center" }}>Bar Chart</h2>
       <Line
         data={data}
         options={{
-          scales = scales,
           plugins: {
             title: {
               display: true,
@@ -61,6 +40,17 @@ export function LineChart() {
             },
             legend: {
               display: false,
+            },
+            zoom: {
+              zoom: {
+                wheel: {
+                  enabled: true,
+                },
+                pinch: {
+                  enabled: true,
+                },
+                mode: "xy",
+              },
             },
           },
         }}

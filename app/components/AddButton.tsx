@@ -4,6 +4,8 @@ import { FieldButton } from "./FieldButton";
 import { Card } from "./Card";
 import { ComponentFunctions } from "./function/Function";
 import { AlertDialog } from "./AlertDialog";
+import { DataComponent } from "./function/DataJson";
+
 export const AddButton: React.FC = () => {
   const [showDialog, setShowDialog] = useState(false);
   const [date, setDate] = useState("");
@@ -147,8 +149,11 @@ export const AddButton: React.FC = () => {
     if (date.trim() === "") {
       newErrors.date = "Date is required";
       isValid = false;
-    } else if (!/^\d{2}\/\d{2}\/\d{4}$/.test(date)) {
-      newErrors.date = "Date must be in dd/MM/YYYY format";
+    } else if (
+      !/^\d{4}\/\d{2}\/\d{2}$/.test(date) &&
+      date.trim().slice(4, 6) !== ""
+    ) {
+      newErrors.date = "Date must be in YYYY/MM/dd format";
       isValid = false;
     }
     if (customerName.trim() === "") {
@@ -174,19 +179,27 @@ export const AddButton: React.FC = () => {
     // You can implement the logic to save the data here
     // For simplicity, let's just log the data to the console
 
-    // Reset the form fields
-    setDate("");
-    setCustomerName("");
-    setSalespersonName("");
-    setNotes("");
-
     // Close the dialog
     setConfirmDialog(true);
   };
   const handleAlertConfirm = () => {
     // Implement your logic for confirm action here
+    const data = {
+      date: date,
+      customerName: customerName,
+      salespersonName: salespersonName,
+      notes: notes,
+      products: Object.values(addedCart),
+    };
+    DataComponent.postData(data);
     setConfirmDialog(false);
     setShowDialog(false);
+    // Reset the form fields
+    setDate("");
+    setCustomerName("");
+    setSalespersonName("");
+    setNotes("");
+    setAddedCart({});
   };
 
   const handleAlertCancel = () => {

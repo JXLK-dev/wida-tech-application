@@ -1,22 +1,25 @@
 import { NextResponse } from "next/server";
-import axios from "axios";
-import mysql from "serverless-mysql";
+import { query } from "../db";
 
-const config = mysql({
-  config: {
-    host: "sql6.freemysqlhosting.net",
-    user: "	sql6690801",
-    password: "	sql6690801",
-    database: "sql6690801",
-    port: "3306",
-  },
-});
 export async function POST(req: Request) {
+  const reqJson = await req.json();
+  const dataJson = JSON.parse(reqJson["body"]);
   try {
-    const results = await db.query(query, values);
-    await db.end();
-    return results;
+    const querySql =
+      "INSERT INTO invoice (invoice_date, customer_name, salesperson_name, notes) VALUES (?,?,?,?)";
+    const values = [
+      dataJson.date,
+      dataJson.customerName,
+      dataJson.salespersonName,
+      dataJson.notes,
+    ];
+    const result = await query(querySql, values);
+    if (result.insertId) {
+      return NextResponse.json({ message: "Success" });
+    } else {
+      return NextResponse.error({ message: "Failed" });
+    }
   } catch (error) {
-    return { error };
+    return NextResponse.error(error.response.data.message);
   }
 }

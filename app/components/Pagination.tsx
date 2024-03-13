@@ -1,4 +1,5 @@
 import React from "react";
+import { DataComponent } from "./function/DataJson";
 
 interface PaginationProps {
   currentPage: number;
@@ -45,6 +46,7 @@ export const Pagination: React.FC<PaginationProps> = ({
       </button>
       {renderPageNumbers()} {/* Add rendered page numbers */}
       <button
+        // onClick={() => DataComponent.postData({ test: "Test" })}
         onClick={() => handlePageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
         className="px-4 py-2 bg-blue-500 text-white rounded disabled:bg-gray-300 disabled:text-gray-500"

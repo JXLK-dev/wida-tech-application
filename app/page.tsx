@@ -3,7 +3,7 @@ import { useState } from "react"; // Import useState hook
 import { InvoiceCard } from "../app/components/InvoiceCard";
 import { AddButton } from "../app/components/AddButton";
 import { NavBar } from "../app/components/NavBar";
-import { AxiosComponent } from "../app/components/function/DataJson";
+import { DataComponent } from "../app/components/function/DataJson";
 import { Pagination } from "../app/components/Pagination";
 
 export default function Home() {
@@ -34,6 +34,11 @@ export default function Home() {
     },
     // Add more card objects as needed
   ];
+  const [data, setData] = useState([]); // Add data state variable
+  const retrieveData = () => {
+    const data = DataComponent.getData();
+    setData(data);
+  };
 
   const [currentPage, setCurrentPage] = useState(1); // Add currentPage state variable
   const cardsPerPage = 5; // Set the number of cards to display per page

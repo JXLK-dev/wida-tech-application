@@ -2,58 +2,46 @@ import React, { Component } from "react";
 import axios from "axios";
 
 export class DataComponent extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      data: null,
-      error: null,
-    };
-  }
-
-  componentDidMount() {
-    this.getData();
-    this.postData();
-  }
-
-  getData() {
+  static getData() {
     axios
-      .get("https://api.example.com/data")
+      .get("http://localhost:3000/api/get-invoice")
       .then((response) => {
+        return response.data;
         // Handle the response data here
-        this.setState({ data: response.data });
+        // this.setState({ data: response.data });
       })
       .catch((error) => {
+        console.error(error.response.data);
         // Handle any errors here
-        this.setState({ error: error.message });
+        // this.setState({ error: error.message });
       });
   }
 
-  postData() {
-    const data = {
-      // Add your POST data here
+  static postData(data) {
+    // console.log(data);
+    const posting = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        date: data.date,
+        customerName: data.customerName,
+        salespersonName: data.salespersonName,
+        notes: data.notes,
+        products: data.products,
+      }),
     };
-
     axios
-      .post("sql6.freemysqlhosting.net")
+      .post("http://localhost:3000/api/insert-invoice", posting)
       .then((response) => {
         // Handle the response data here
         console.log(response.data);
       })
       .catch((error) => {
         // Handle any errors here
-        console.error(error);
+        console.error(error.response.data);
       });
-  }
-
-  render() {
-    const { data, error } = this.state;
-
-    return (
-      <div>
-        {/* Your component JSX goes here */}
-        {data && <div>Data: {data}</div>}
-        {error && <div>Error: {error}</div>}
-      </div>
-    );
+    return;
   }
 }

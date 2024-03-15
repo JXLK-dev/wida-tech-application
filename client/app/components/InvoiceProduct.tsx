@@ -23,7 +23,7 @@ export const InvoiceProduct: React.FC<InvoiceProductProps> = (props) => {
         props.index % 2 === 0 ? "bg-white" : "bg-slate-200"
       } ${props.onClick && "cursor-pointer"}`}
     >
-      <Image
+      <img
         className="lg:min-w-40 md:min-w-28 min-w-20"
         src={props.imageSrc}
         alt={props.name}

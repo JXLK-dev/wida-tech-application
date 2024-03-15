@@ -221,7 +221,7 @@ export const AddButton: React.FC = (props) => {
       notes: notes,
       products: Object.values(addedCart),
     };
-
+    console.log(data);
     setLoading(true);
     props.refresh(false);
     const success = await DataComponent.postData(

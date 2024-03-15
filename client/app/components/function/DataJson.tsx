@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 
 export class DataComponent extends Component {
-  static getData = async (url, pagination) => {
+  static getData = async (url) => {
     const response = await axios
       .get(url)
       .then((response) => {

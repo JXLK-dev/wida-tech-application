@@ -26,7 +26,7 @@ export const GetData: React.FC = (props) => {
   return data.map((card, index) => (
     <InvoiceCard
       key={index}
-      date={card.date}
+      date={card.invoice_date}
       invoiceId={card.invoice_number}
       customerName={card.customer_name}
       notes={card.notes}

@@ -29,93 +29,72 @@ export const AddButton: React.FC = (props) => {
     {
       imgSrc:
         "https://img-global.cpcdn.com/recipes/d5fdeda7a69719d9/1200x630cq70/photo.jpg",
-      name: "Jordan 1",
-      price: "1950000",
-      quantity: "5",
-    },
-    {
-      imgSrc:
-        "https://img-global.cpcdn.com/recipes/d5fdeda7a69719d9/1200x630cq70/photo.jpg",
-      name: "Jordan 2",
-      price: "1950000",
-      quantity: "5",
-    },
-    {
-      imgSrc:
-        "https://img-global.cpcdn.com/recipes/d5fdeda7a69719d9/1200x630cq70/photo.jpg",
-      name: "Jordan 15",
-      price: "2000000",
+      name: "Bluetooth speaker",
+      price: "756000",
       quantity: "3",
     },
     {
       imgSrc:
         "https://img-global.cpcdn.com/recipes/d5fdeda7a69719d9/1200x630cq70/photo.jpg",
-      name: "Jordan 16",
-      price: "1800000",
-      quantity: "7",
-    },
-    {
-      imgSrc:
-        "https://img-global.cpcdn.com/recipes/d5fdeda7a69719d9/1200x630cq70/photo.jpg",
-      name: "Jordan 17",
-      price: "2200000",
-      quantity: "2",
-    },
-    {
-      imgSrc:
-        "https://img-global.cpcdn.com/recipes/d5fdeda7a69719d9/1200x630cq70/photo.jpg",
-      name: "Jordan 18",
-      price: "1900000",
-      quantity: "4",
-    },
-    {
-      imgSrc:
-        "https://img-global.cpcdn.com/recipes/d5fdeda7a69719d9/1200x630cq70/photo.jpg",
-      name: "Jordan 19",
-      price: "2100000",
-      quantity: "6",
-    },
-    {
-      imgSrc:
-        "https://img-global.cpcdn.com/recipes/d5fdeda7a69719d9/1200x630cq70/photo.jpg",
-      name: "Jordan 20",
-      price: "2300000",
-      quantity: "1",
-    },
-    {
-      imgSrc:
-        "https://img-global.cpcdn.com/recipes/d5fdeda7a69719d9/1200x630cq70/photo.jpg",
-      name: "Jordan 21",
-      price: "2400000",
+      name: "Headphone",
+      price: "480000",
       quantity: "8",
     },
     {
       imgSrc:
         "https://img-global.cpcdn.com/recipes/d5fdeda7a69719d9/1200x630cq70/photo.jpg",
-      name: "Jordan 22",
-      price: "1700000",
-      quantity: "9",
+      name: "Laptop charger",
+      price: "960000",
+      quantity: "4",
     },
     {
       imgSrc:
         "https://img-global.cpcdn.com/recipes/d5fdeda7a69719d9/1200x630cq70/photo.jpg",
-      name: "Jordan 23",
-      price: "2500000",
+      name: "LCD Monitor",
+      price: "600000",
+      quantity: "1",
+    },
+    {
+      imgSrc:
+        "https://img-global.cpcdn.com/recipes/d5fdeda7a69719d9/1200x630cq70/photo.jpg",
+      name: "Bluetooth speaker",
+      price: "504000",
       quantity: "2",
     },
     {
       imgSrc:
         "https://img-global.cpcdn.com/recipes/d5fdeda7a69719d9/1200x630cq70/photo.jpg",
-      name: "Jordan 24",
-      price: "2600000",
-      quantity: "5",
+      name: "Headphone",
+      price: "60000",
+      quantity: "1",
     },
     {
       imgSrc:
         "https://img-global.cpcdn.com/recipes/d5fdeda7a69719d9/1200x630cq70/photo.jpg",
-      name: "Jordan 14",
-      price: "1950000",
-      quantity: "5",
+      name: "Laptop charger",
+      price: "720000",
+      quantity: "3",
+    },
+    {
+      imgSrc:
+        "https://img-global.cpcdn.com/recipes/d5fdeda7a69719d9/1200x630cq70/photo.jpg",
+      name: "Bluetooth speaker",
+      price: "252000",
+      quantity: "1",
+    },
+    {
+      imgSrc:
+        "https://img-global.cpcdn.com/recipes/d5fdeda7a69719d9/1200x630cq70/photo.jpg",
+      name: "Bluetooth speaker",
+      price: "252000",
+      quantity: "1",
+    },
+    {
+      imgSrc:
+        "https://img-global.cpcdn.com/recipes/d5fdeda7a69719d9/1200x630cq70/photo.jpg",
+      name: "Headphone",
+      price: "120000",
+      quantity: "2",
     },
   ];
   const addToCart = (product) => {

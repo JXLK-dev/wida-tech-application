@@ -175,7 +175,6 @@ export const AddButton: React.FC = (props) => {
       notes: "",
     };
 
-    // Validate each field
     if (date.trim() === "") {
       newErrors.date = "Date is required";
       isValid = false;
@@ -199,21 +198,14 @@ export const AddButton: React.FC = (props) => {
       isValid = false;
     }
 
-    // If any field is invalid, update the errors state and return
     if (!isValid) {
       setErrors(newErrors);
       return;
     }
 
-    // Save the data to a temporary list
-    // You can implement the logic to save the data here
-    // For simplicity, let's just log the data to the console
-
-    // Close the dialog
     setConfirmDialog(true);
   };
   const handleAlertConfirm = async () => {
-    // Implement your logic for confirm action here
     const data = {
       date: date,
       customerName: customerName,
@@ -226,14 +218,14 @@ export const AddButton: React.FC = (props) => {
     props.refresh(false);
     const success = await DataComponent.postData(
       data,
-      "http://localhost:3000/api/insert-invoice"
+      "http://localhost:8080/api/insert-invoice"
     );
     props.refresh(true);
     setLoading(false);
     setNotification(true);
     setConfirmDialog(false);
     setShowDialog(false);
-    // Reset the form fields
+
     setDate("");
     setCustomerName("");
     setSalespersonName("");
@@ -242,7 +234,6 @@ export const AddButton: React.FC = (props) => {
   };
 
   const handleAlertCancel = () => {
-    // Implement your logic for cancel action here
     setConfirmDialog(false);
   };
   const labels = ["Date", "Customer Name", "Salesperson Name", "Notes"];

@@ -5,7 +5,8 @@ const app = express();
 const port = 8080;
 
 app.use(cors());
-// Define your routes here
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 const config = {
   host: "sql6.freemysqlhosting.net",
@@ -44,8 +45,7 @@ app.get("/api/get-invoice", async (req, res) => {
 
 app.post("/api/insert-invoice", async (req, res) => {
   const uniqueInvoiceId = `INV-${Date.now()}`;
-  const reqJson = await req.json();
-  const dataJson = JSON.parse(reqJson["body"]);
+  const dataJson = JSON.parse(req.body.body);
   try {
     const querySqlProduct =
       "INSERT INTO products (invoice_number, name, price, quantity,imgSrc) VALUES (?,?,?,?,?)";
@@ -75,11 +75,7 @@ app.post("/api/insert-invoice", async (req, res) => {
     return res.error(error.response.data.message);
   }
 });
-app.get("/api/get-products", async (req, res) => {
-  const querySql = "SELECT * FROM products";
-  const result = await query(querySql);
-  res.json({ result: result });
-});
+
 app.get("/api/get-sales-performance", async (req, res) => {
   const querySql =
     "SELECT invoice.invoice_date, (products.price*products.quantity) AS 'Revenue' FROM invoice JOIN products ON invoice.invoice_number = products.invoice_number ORDER BY invoice.invoice_date DESC";

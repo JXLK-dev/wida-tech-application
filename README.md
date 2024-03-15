@@ -8,7 +8,7 @@ This project is built using Next.js and React to optimize performance and enhanc
 - React: A JavaScript library for building user interfaces.
 - Tailwind CSS: A utility-first CSS framework for rapidly building custom designs.
 - Chart.js: A JavaScript library for data visualization.
-- [Add more technologies used in your project]
+- Node Js (Express JS) for api
 
 ## Getting Started
 
@@ -34,3 +34,11 @@ If you have any questions or suggestions, feel free to reach out to us at [jerry
 The API for this website was built using the App Router library in React.js. App Router is a lightweight routing library that helps in creating routes for single-page applications.
 
 As for the database, SQL was used to store and manage the data for this website. SQL is a widely used relational database management system that provides a structured approach to storing and retrieving data.
+
+## Steps for running locally
+
+- First is to run npm run dev on the client and on the server js script
+
+## NOTES
+
+- the link for api used for running the website is localhost:3000 and the server js is localhost:8080

@@ -9,12 +9,21 @@ import { GetData } from "../app/components/function/GetData";
 import { useEffect } from "react";
 
 export default function Home() {
+  const [data, setData] = useState([]); // Add data state variable
   const [refresh, setRefresh] = useState(true); // Add refresh state variable
   const [currentPage, setCurrentPage] = useState(1); // Add currentPage state variable
   const [indexOfFirstCard, setIndexOfFirstCard] = useState(0); // Add indexOfFirstCard state variable
   const [indexOfLastCard, setIndexOfLastCard] = useState(10); // Add indexOfLastCard state variable
   const [totalPages, setTotalPages] = useState(1); // Add totalPages state variable
   // Calculate the index of the first and last card to display
+
+  const fetchPaginationData = async (offset) => {
+    const json = await DataComponent.getData(
+      `http://localhost:8080/api/get-invoice?offset=${offset}`
+    );
+    setData(json.result);
+  };
+
   useEffect(() => {
     // Fetch data from the database or API
     const fetchData = async () => {
@@ -24,6 +33,7 @@ export default function Home() {
       setTotalPages(json.result[0]["totalCards"] / 10 + 1);
     };
     fetchData();
+    fetchPaginationData(indexOfFirstCard);
   }, []);
 
   return (
@@ -37,10 +47,9 @@ export default function Home() {
           setIndexOfFirstCard={setIndexOfFirstCard}
           setIndexOfLastCard={setIndexOfLastCard}
           handlePageChange={setCurrentPage}
+          fetchPaginationData={fetchPaginationData}
         />
-        <div className="w-3/4">
-          {refresh && <GetData offset={indexOfFirstCard} />}
-        </div>
+        <div className="w-3/4">{refresh && <GetData data={data} />}</div>
       </div>
       <AddButton refresh={setRefresh} />
     </main>

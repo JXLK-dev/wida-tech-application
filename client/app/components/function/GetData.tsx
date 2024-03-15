@@ -9,18 +9,7 @@ interface Data {
 }
 
 export const GetData: React.FC = (props) => {
-  const [data, setData] = useState([]);
-  useEffect(() => {
-    const fetchData = async () => {
-      const json = await DataComponent.getData(
-        `http://localhost:8080/api/get-invoice?offset=${props.offset}`
-      );
-      setData(json.result);
-    };
-    fetchData();
-  }, []);
-
-  return data.map((card, index) => (
+  return props.data.map((card, index) => (
     <InvoiceCard
       key={index}
       date={card.invoice_date}

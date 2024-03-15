@@ -13,6 +13,7 @@ export const Pagination: React.FC<PaginationProps> = ({
   handlePageChange,
   setIndexOfFirstCard,
   setIndexOfLastCard,
+  fetchPaginationData,
 }) => {
   const renderPageNumbers = () => {
     const pageNumbers = [];
@@ -28,6 +29,7 @@ export const Pagination: React.FC<PaginationProps> = ({
             setIndexOfLastCard(i * 10);
             refreshPage(false);
             handlePageChange(i);
+            fetchPaginationData((i - 1) * 10);
             refreshPage(true);
           }}
           className={`px-4 py-2 rounded ${
@@ -47,8 +49,9 @@ export const Pagination: React.FC<PaginationProps> = ({
     <div className="bottom-0 mr-20 fixed flex items-center justify-center space-x-4 z-20 bg-cyan-800 rounded-md p-2 mb-3">
       <button
         onClick={() => {
-          setIndexOfFirstCard((i - 1) * 10);
-          setIndexOfLastCard(i * 10);
+          setIndexOfFirstCard((currentPage - 1) * 10);
+          setIndexOfLastCard(currentPage * 10);
+          fetchPaginationData((currentPage - 1) * 10);
           refreshPage(false);
           handlePageChange(currentPage - 1);
           refreshPage(true);
@@ -61,8 +64,9 @@ export const Pagination: React.FC<PaginationProps> = ({
       {renderPageNumbers()} {/* Add rendered page numbers */}
       <button
         onClick={() => {
-          setIndexOfFirstCard((i - 1) * 10);
-          setIndexOfLastCard(i * 10);
+          setIndexOfFirstCard((currentPage - 1) * 10);
+          setIndexOfLastCard(currentPage * 10);
+          fetchPaginationData((currentPage - 1) * 10);
           refreshPage(false);
           handlePageChange(currentPage + 1);
           refreshPage(true);
